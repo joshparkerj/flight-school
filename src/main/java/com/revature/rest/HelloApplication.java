@@ -13,6 +13,7 @@ public class HelloApplication extends Application{
 		final Set<Class<?>> returnValue = new HashSet<Class<?>>();
 		returnValue.add(PilotServlet.class);
 		returnValue.add(AircraftServlet.class);
+		returnValue.add(CertificationServlet.class);
 		return returnValue;
 	}
 }

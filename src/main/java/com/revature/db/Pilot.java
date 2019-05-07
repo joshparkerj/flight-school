@@ -2,6 +2,8 @@ package com.revature.db;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pilot implements Serializable {
 
@@ -10,6 +12,7 @@ public class Pilot implements Serializable {
 	private String name;
 	private Date dob;
 	private String sex;
+	private List<Craft> craft;
 
 	Pilot() {
 
@@ -20,6 +23,19 @@ public class Pilot implements Serializable {
 		name = n;
 		dob = d;
 		sex = s;
+		craft = new ArrayList<Craft>();
+	}
+
+	public List<Craft> getCraft() {
+		return craft;
+	}
+
+	public void setCraft(List<Craft> craft) {
+		this.craft = craft;
+	}
+	
+	public void addCraft(Craft c) {
+		craft.add(c);
 	}
 
 	public int getId() {

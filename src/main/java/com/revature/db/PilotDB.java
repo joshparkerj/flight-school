@@ -18,7 +18,16 @@ public class PilotDB implements Accessible.PilotAccess {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-					return new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"));
+					Pilot p = new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"));
+					try (PreparedStatement ps2 = con.prepareStatement("SELECT * FROM pilot_craft WHERE pilot_id = ?;")){
+						ps2.setInt(1,id);
+						try (ResultSet rs2 = ps2.executeQuery()){
+							while (rs2.next()) {
+								p.addCraft(new Craft(rs2.getInt("aircraft_id"), rs2.getString("aircraft")));
+							}
+							return p;
+						}
+					}
 				}
 			}
 		} catch (SQLException e) {

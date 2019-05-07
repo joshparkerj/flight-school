@@ -12,6 +12,7 @@ public class HelloApplication extends Application{
 	public Set< Class<?> > getClasses() {
 		final Set<Class<?>> returnValue = new HashSet<Class<?>>();
 		returnValue.add(PilotServlet.class);
+		returnValue.add(AircraftServlet.class);
 		return returnValue;
 	}
 }

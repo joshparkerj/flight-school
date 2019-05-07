@@ -26,7 +26,7 @@ public class PilotServlet {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getPilots(@DefaultValue("0") @QueryParam("page") int page) {
+	public String getPilots(@DefaultValue("1") @QueryParam("page") int page) {
 		List<Pilot> p = Access.getAccess().Pilot.getPilots(page);
 		int pilotCount = Access.getAccess().Pilot.getCount();
 		StringBuilder sb = new StringBuilder();

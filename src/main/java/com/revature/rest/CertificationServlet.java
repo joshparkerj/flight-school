@@ -26,7 +26,7 @@ public class CertificationServlet {
 	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCrafts(@DefaultValue("0") @QueryParam("page") int page) {
+	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page) {
 		List<Cert> c = Access.getAccess().Cert.getCerts(page);
 		int certCount = Access.getAccess().Cert.getCount();
 		StringBuilder sb = new StringBuilder();

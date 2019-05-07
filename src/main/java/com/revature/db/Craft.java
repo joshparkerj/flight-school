@@ -7,12 +7,12 @@ public class Craft implements Serializable {
 	private static final long serialVersionUID = 5188053125440209114L;
 	private int id;
 	private String name;
-	
-	Craft(){
-		
+
+	Craft() {
+
 	}
-	
-	Craft(int i, String n){
+
+	Craft(int i, String n) {
 		id = i;
 		name = n;
 	}
@@ -28,5 +28,5 @@ public class Craft implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

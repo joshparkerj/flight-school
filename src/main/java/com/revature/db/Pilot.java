@@ -33,7 +33,7 @@ public class Pilot implements Serializable {
 	public void setCraft(List<Craft> craft) {
 		this.craft = craft;
 	}
-	
+
 	public void addCraft(Craft c) {
 		craft.add(c);
 	}

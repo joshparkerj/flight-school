@@ -24,6 +24,7 @@ public class AircraftServlet {
 		objectMapper = new ObjectMapper();
 		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCrafts(@DefaultValue("0") @QueryParam("page") int page) {

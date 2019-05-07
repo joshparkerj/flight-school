@@ -14,6 +14,7 @@ public class HelloApplication extends Application{
 		returnValue.add(PilotServlet.class);
 		returnValue.add(AircraftServlet.class);
 		returnValue.add(CertificationServlet.class);
+		returnValue.add(APIRootServlet.class);
 		return returnValue;
 	}
 }

@@ -27,14 +27,33 @@ public class AircraftServlet {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCrafts(@DefaultValue("0") @QueryParam("page") int page) {
+	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page) {
 		List<Craft> c = Access.getAccess().Craft.getCrafts(page);
+		int craftCount = Access.getAccess().Craft.getCount();
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\"count\":");
+		sb.append(craftCount);
+		sb.append(",\"next\":");
+		if (craftCount > (page)*10) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
+			sb.append(page+1);
+			sb.append("\"");
+		} else sb.append("null");
+		sb.append(",\"previous\":");
+		if (page > 1) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
+			sb.append(page-1);
+			sb.append("\"");
+		} else sb.append("null");
+		sb.append(",\"results\":");
 		try {
-			return objectMapper.writeValueAsString(c);
+			sb.append(objectMapper.writeValueAsString(c));
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
-			return "{}";
+			sb.append("null");
 		}
+		sb.append("}");
+		return sb.toString();
 	}
 
 	@GET

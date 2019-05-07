@@ -28,12 +28,31 @@ public class PilotServlet {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPilots(@DefaultValue("0") @QueryParam("page") int page) {
 		List<Pilot> p = Access.getAccess().Pilot.getPilots(page);
+		int pilotCount = Access.getAccess().Pilot.getCount();
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\"count\":");
+		sb.append(pilotCount);
+		sb.append(",\"next\":");
+		if (pilotCount > (page)*10) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/pilot?page=");
+			sb.append(page+1);
+			sb.append("\"");
+		} else sb.append("null");
+		sb.append(",\"previous\":");
+		if (page > 1) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/pilot?page=");
+			sb.append(page-1);
+			sb.append("\"");
+		} else sb.append("null");
+		sb.append(",\"results\":");
 		try {
-			return objectMapper.writeValueAsString(p);
+			sb.append(objectMapper.writeValueAsString(p));
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
-			return "{}";
+			sb.append("null");
 		}
+		sb.append("}");
+		return sb.toString();
 	}
 	
 	@GET

@@ -28,12 +28,31 @@ public class CertificationServlet {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCrafts(@DefaultValue("0") @QueryParam("page") int page) {
 		List<Cert> c = Access.getAccess().Cert.getCerts(page);
+		int certCount = Access.getAccess().Cert.getCount();
+		StringBuilder sb = new StringBuilder();
+		sb.append("{\"count\":");
+		sb.append(certCount);
+		sb.append(",\"next\":");
+		if (certCount > (page)*10) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
+			sb.append(page+1);
+			sb.append("\"");
+		} else sb.append("null");
+		sb.append(",\"previous\":");
+		if (page > 1) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
+			sb.append(page-1);
+			sb.append("\"");
+		} else sb.append("null");
+		sb.append(",\"results\":");
 		try {
-			return objectMapper.writeValueAsString(c);
+			sb.append(objectMapper.writeValueAsString(c));
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
-			return "{}";
+			sb.append("null");
 		}
+		sb.append("}");
+		return sb.toString();
 	}
 
 	@GET

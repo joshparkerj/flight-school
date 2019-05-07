@@ -41,9 +41,9 @@ public class PilotDB implements Accessible.PilotAccess {
 
 	public List<Pilot> getPilots(int page) {
 		List<Pilot> p = new ArrayList<Pilot>();
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot LIMIT 10 OFFSET ?;")){
-			ps.setInt(1, 10*page);
-			try (ResultSet rs = ps.executeQuery()){
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot LIMIT 10 OFFSET ?;")) {
+			ps.setInt(1, 10 * (page - 1));
+			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					p.add(new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex")));
 				}
@@ -52,6 +52,18 @@ public class PilotDB implements Accessible.PilotAccess {
 			e.printStackTrace();
 		}
 		return p;
+	}
+
+	public int getCount() {
+		try (PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM pilot;")) {
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next())
+					return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 }

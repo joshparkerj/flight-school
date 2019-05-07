@@ -1,6 +1,7 @@
 package com.revature.rest;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -22,6 +23,7 @@ public class PilotServlet {
 	static ObjectMapper objectMapper;
 	static {
 		objectMapper = new ObjectMapper();
+		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 	}
 	/*
 	@GET

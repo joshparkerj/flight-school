@@ -16,11 +16,11 @@ public class CertDB {
 	}
 
 	public Cert getByID(int id) {
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM cert WHERE id = ?;")) {
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM cert_details WHERE id = ?;")) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-					Cert c = new Cert(rs.getInt("id"), rs.getString("name"));
+					Cert c = new Cert(rs.getInt("id"), rs.getString("name"), rs.getInt("craft"), rs.getInt("pilots"));
 					try (PreparedStatement ps2 = con.prepareStatement("SELECT * FROM cert_pilot WHERE cert_id = ?;")) {
 						ps2.setInt(1, id);
 						try (ResultSet rs2 = ps2.executeQuery()) {
@@ -53,11 +53,11 @@ public class CertDB {
 
 	public List<Cert> getCerts(int page) {
 		List<Cert> c = new ArrayList<Cert>();
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM cert LIMIT 10 OFFSET ?;")) {
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM cert_details LIMIT 10 OFFSET ?;")) {
 			ps.setInt(1, 10 * (page - 1));
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					c.add(new Cert(rs.getInt("id"), rs.getString("name")));
+					c.add(new Cert(rs.getInt("id"), rs.getString("name"), rs.getInt("craft"), rs.getInt("pilots")));
 				}
 			}
 		} catch (SQLException e) {

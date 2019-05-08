@@ -9,6 +9,9 @@ public class Cert implements Serializable {
 	private static final long serialVersionUID = -621842246422607931L;
 	private int id;
 	private String name;
+	private int craft_count;
+	private int pilot_count;
+	private String url;
 	private List<Pilot> pilots;
 	private List<Craft> craft;
 
@@ -16,9 +19,12 @@ public class Cert implements Serializable {
 
 	}
 
-	Cert(int i, String n) {
+	Cert(int i, String n, int c, int p) {
 		id = i;
 		name = n;
+		craft_count = c;
+		pilot_count = p;
+		url = "https://flightschool.joshquizzes.com/api/certification/" + id + "/";
 		pilots = new ArrayList<Pilot>();
 		craft = new ArrayList<Craft>();
 	}
@@ -57,6 +63,18 @@ public class Cert implements Serializable {
 
 	public void addCraft(Craft c) {
 		craft.add(c);
+	}
+
+	public int getCraft_count() {
+		return craft_count;
+	}
+
+	public int getPilot_count() {
+		return pilot_count;
+	}
+
+	public String getUrl() {
+		return url;
 	}
 
 }

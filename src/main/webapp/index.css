@@ -1,0 +1,41 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: maroon;
+	color: chartreuse;
+	font-family: Georgia;
+	text-align: center;
+	font-size: 1.3em;
+}
+
+header {
+	padding: 50px;
+    background-color: rgba(0,0,0,0.2);
+    margin: 0;
+    border-bottom: 5px solid rgba(0,0,0,0.5);
+}
+
+main {
+	background-color: rgba(100,0,0,0.3);
+	border-bottom: 10px solid rgba(100,0,0,0.6);
+	margin: 0 150px;
+	padding: 150px;
+}
+
+footer {
+	display: grid;
+	grid-template-columns: 1fr 2fr 1fr;
+	margin: 50px 150px;
+}
+
+footer div {
+	grid-column: span 1;
+	margin: 25px;
+	padding: 25px 25px 125px 25px;
+	background-color: rgba(0,100,100,0.4);
+	box-shadow: 3px 3px 6px black;
+}
+
+a {
+	color: red;
+}

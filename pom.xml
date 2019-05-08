@@ -65,4 +65,7 @@
 			<version>2.22.2</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<finalName>flightschool</finalName>
+	</build>
 </project>

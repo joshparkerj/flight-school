@@ -33,7 +33,8 @@ public class CertDB {
 								ps3.setInt(1, id);
 								try (ResultSet rs3 = ps3.executeQuery()) {
 									while (rs3.next()) {
-										c.addCraft(new Craft(rs3.getInt("aircraft_id"), rs3.getString("aircraft")));
+										c.addCraft(new Craft(rs3.getInt("aircraft_id"), rs3.getString("aircraft"),
+												rs3.getString("certs"), rs3.getInt("pilots")));
 									}
 									return c;
 								}

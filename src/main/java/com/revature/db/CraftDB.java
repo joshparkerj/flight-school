@@ -16,11 +16,12 @@ public class CraftDB {
 	}
 
 	public Craft getByID(int id) {
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM aircraft WHERE id = ?;")) {
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM aircraft_details WHERE id = ?;")) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-					Craft c = new Craft(rs.getInt("id"), rs.getString("name"));
+					Craft c = new Craft(rs.getInt("id"), rs.getString("name"), rs.getString("certs"),
+							rs.getInt("pilots"));
 					try (PreparedStatement ps2 = con
 							.prepareStatement("SELECT * FROM craft_pilot WHERE aircraft_id = ?;")) {
 						ps2.setInt(1, id);
@@ -43,11 +44,11 @@ public class CraftDB {
 
 	public List<Craft> getCrafts(int page) {
 		List<Craft> c = new ArrayList<Craft>();
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM aircraft LIMIT 10 OFFSET ?;")) {
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM aircraft_details LIMIT 10 OFFSET ?;")) {
 			ps.setInt(1, 10 * (page - 1));
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					c.add(new Craft(rs.getInt("id"), rs.getString("name")));
+					c.add(new Craft(rs.getInt("id"), rs.getString("name"), rs.getString("certs"), rs.getInt("pilots")));
 				}
 			}
 		} catch (SQLException e) {

@@ -9,15 +9,21 @@ public class Craft implements Serializable {
 	private static final long serialVersionUID = 5188053125440209114L;
 	private int id;
 	private String name;
+	private String certs;
+	private int pilot_count;
+	private String url;
 	private List<Pilot> pilots;
 
 	Craft() {
 
 	}
 
-	Craft(int i, String n) {
+	Craft(int i, String n, String c, int p) {
 		id = i;
 		name = n;
+		certs = c;
+		pilot_count = p;
+		url = "https://flightschool.joshquizzes.com/api/aircraft/" + id + "/";
 		pilots = new ArrayList<Pilot>();
 	}
 
@@ -40,9 +46,21 @@ public class Craft implements Serializable {
 	public void setPilots(List<Pilot> pilots) {
 		this.pilots = pilots;
 	}
-	
+
 	public void addPilot(Pilot p) {
 		pilots.add(p);
+	}
+
+	public String getCerts() {
+		return certs;
+	}
+
+	public int getPilot_count() {
+		return pilot_count;
+	}
+
+	public String getUrl() {
+		return url;
 	}
 
 }

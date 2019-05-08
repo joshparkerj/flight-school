@@ -26,7 +26,7 @@ public class CertDB {
 						try (ResultSet rs2 = ps2.executeQuery()) {
 							while (rs2.next()) {
 								c.addPilot(new Pilot(rs2.getInt("pilot_id"), rs2.getString("pilot"), rs2.getDate("dob"),
-										rs2.getString("sex")));
+										rs2.getString("sex"), rs2.getInt("craft")));
 							}
 							try (PreparedStatement ps3 = con
 									.prepareStatement("SELECT * FROM craft_cert WHERE cert_id = ?;")) {

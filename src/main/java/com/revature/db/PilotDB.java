@@ -16,11 +16,11 @@ public class PilotDB implements Accessible.PilotAccess {
 	}
 
 	public Pilot getByID(int id) {
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot WHERE id = ?;")) {
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot_details WHERE id = ?;")) {
 			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
-					Pilot p = new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"));
+					Pilot p = new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"), rs.getInt("craft"));
 					try (PreparedStatement ps2 = con
 							.prepareStatement("SELECT * FROM pilot_craft WHERE pilot_id = ?;")) {
 						ps2.setInt(1, id);
@@ -41,11 +41,11 @@ public class PilotDB implements Accessible.PilotAccess {
 
 	public List<Pilot> getPilots(int page) {
 		List<Pilot> p = new ArrayList<Pilot>();
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot LIMIT 10 OFFSET ?;")) {
+		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot_details LIMIT 10 OFFSET ?;")) {
 			ps.setInt(1, 10 * (page - 1));
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					p.add(new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex")));
+					p.add(new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"), rs.getInt("craft")));
 				}
 			}
 		} catch (SQLException e) {

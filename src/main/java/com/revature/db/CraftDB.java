@@ -27,7 +27,7 @@ public class CraftDB {
 						try (ResultSet rs2 = ps2.executeQuery()) {
 							while (rs2.next()) {
 								c.addPilot(new Pilot(rs2.getInt("pilot_id"), rs2.getString("pilot"), rs2.getDate("dob"),
-										rs2.getString("sex")));
+										rs2.getString("sex"), rs2.getInt("craft")));
 							}
 							return c;
 						}

@@ -7,6 +7,8 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.Constants;
+
 public class Pilot implements Serializable {
 
 	private static final long serialVersionUID = -8585962084002167973L;
@@ -20,7 +22,7 @@ public class Pilot implements Serializable {
 	private List<Craft> craft;
 
 	Pilot() {
-
+		craft = new ArrayList<Craft>();
 	}
 
 	Pilot(int i, String n, Date d, String s, int a) {
@@ -30,7 +32,7 @@ public class Pilot implements Serializable {
 		sex = s;
 		aircraft_count = a;
 		age = Period.between(dob.toLocalDate(), LocalDate.now()).getYears();
-		url = "https://flightschool.joshquizzes.com/api/pilot/" + id + "/";
+		url = Constants.url + "pilot/" + id + "/";
 		craft = new ArrayList<Craft>();
 	}
 

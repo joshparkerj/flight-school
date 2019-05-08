@@ -12,6 +12,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.Constants;
 import com.revature.db.Access;
 import com.revature.db.Pilot;
 
@@ -34,14 +35,14 @@ public class PilotController {
 		sb.append(pilotCount);
 		sb.append(",\"next\":");
 		if (pilotCount > (page) * 10) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/pilot?page=");
+			sb.append("\"" + Constants.url + "pilot?page=");
 			sb.append(page + 1);
 			sb.append("\"");
 		} else
 			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/pilot?page=");
+			sb.append("\"" + Constants.url + "pilot?page=");
 			sb.append(page - 1);
 			sb.append("\"");
 		} else

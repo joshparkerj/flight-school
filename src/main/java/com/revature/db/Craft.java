@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.Constants;
+
 public class Craft implements Serializable {
 
 	private static final long serialVersionUID = 5188053125440209114L;
@@ -15,7 +17,7 @@ public class Craft implements Serializable {
 	private List<Pilot> pilots;
 
 	Craft() {
-
+		pilots = new ArrayList<Pilot>();
 	}
 
 	Craft(int i, String n, String c, int p) {
@@ -23,7 +25,7 @@ public class Craft implements Serializable {
 		name = n;
 		certs = c;
 		pilot_count = p;
-		url = "https://flightschool.joshquizzes.com/api/aircraft/" + id + "/";
+		url = Constants.url + "aircraft/" + id + "/";
 		pilots = new ArrayList<Pilot>();
 	}
 

@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.Constants;
 import com.revature.db.Access;
 import com.revature.db.Craft;
 
@@ -35,14 +36,14 @@ public class AircraftController {
 		sb.append(craftCount);
 		sb.append(",\"next\":");
 		if (craftCount > (page) * 10) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
+			sb.append("\"" + Constants.url + "aircraft?page=");
 			sb.append(page + 1);
 			sb.append("\"");
 		} else
 			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
+			sb.append("\"" + Constants.url + "aircraft?page=");
 			sb.append(page - 1);
 			sb.append("\"");
 		} else

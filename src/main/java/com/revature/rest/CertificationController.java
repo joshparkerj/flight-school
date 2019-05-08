@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.Constants;
 import com.revature.db.Access;
 import com.revature.db.Cert;
 
@@ -35,14 +36,14 @@ public class CertificationController {
 		sb.append(certCount);
 		sb.append(",\"next\":");
 		if (certCount > (page) * 10) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
+			sb.append("\"" + Constants.url + "certification?page=");
 			sb.append(page + 1);
 			sb.append("\"");
 		} else
 			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
+			sb.append("\"" + Constants.url + "certification?page=");
 			sb.append(page - 1);
 			sb.append("\"");
 		} else

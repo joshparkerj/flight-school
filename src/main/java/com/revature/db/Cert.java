@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.Constants;
+
 public class Cert implements Serializable {
 
 	private static final long serialVersionUID = -621842246422607931L;
@@ -16,7 +18,8 @@ public class Cert implements Serializable {
 	private List<Craft> craft;
 
 	Cert() {
-
+		pilots = new ArrayList<Pilot>();
+		craft = new ArrayList<Craft>();
 	}
 
 	Cert(int i, String n, int c, int p) {
@@ -24,7 +27,7 @@ public class Cert implements Serializable {
 		name = n;
 		craft_count = c;
 		pilot_count = p;
-		url = "https://flightschool.joshquizzes.com/api/certification/" + id + "/";
+		url = Constants.url + "certification/" + id + "/";
 		pilots = new ArrayList<Pilot>();
 		craft = new ArrayList<Craft>();
 	}

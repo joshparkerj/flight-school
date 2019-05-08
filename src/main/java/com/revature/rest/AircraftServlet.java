@@ -34,17 +34,19 @@ public class AircraftServlet {
 		sb.append("{\"count\":");
 		sb.append(craftCount);
 		sb.append(",\"next\":");
-		if (craftCount > (page)*10) {
+		if (craftCount > (page) * 10) {
 			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
-			sb.append(page+1);
+			sb.append(page + 1);
 			sb.append("\"");
-		} else sb.append("null");
+		} else
+			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
 			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
-			sb.append(page-1);
+			sb.append(page - 1);
 			sb.append("\"");
-		} else sb.append("null");
+		} else
+			sb.append("null");
 		sb.append(",\"results\":");
 		try {
 			sb.append(objectMapper.writeValueAsString(c));
@@ -53,7 +55,7 @@ public class AircraftServlet {
 			sb.append("null");
 		}
 		sb.append("}");
-		return sb.toString();
+		return sb.toString().replaceAll(",\"pilots\":\\[\\]", "");
 	}
 
 	@GET
@@ -62,7 +64,7 @@ public class AircraftServlet {
 	public String getCraft(@PathParam("id") int id) {
 		Craft c = Access.getAccess().Craft.getByID(id);
 		try {
-			return objectMapper.writeValueAsString(c);
+			return objectMapper.writeValueAsString(c).replaceAll(",\"craft\":\\[\\]", "");
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return "{}";

@@ -24,6 +24,7 @@ public class CertificationServlet {
 		objectMapper = new ObjectMapper();
 		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page) {
@@ -33,17 +34,19 @@ public class CertificationServlet {
 		sb.append("{\"count\":");
 		sb.append(certCount);
 		sb.append(",\"next\":");
-		if (certCount > (page)*10) {
+		if (certCount > (page) * 10) {
 			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
-			sb.append(page+1);
+			sb.append(page + 1);
 			sb.append("\"");
-		} else sb.append("null");
+		} else
+			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
 			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
-			sb.append(page-1);
+			sb.append(page - 1);
 			sb.append("\"");
-		} else sb.append("null");
+		} else
+			sb.append("null");
 		sb.append(",\"results\":");
 		try {
 			sb.append(objectMapper.writeValueAsString(c));
@@ -52,7 +55,7 @@ public class CertificationServlet {
 			sb.append("null");
 		}
 		sb.append("}");
-		return sb.toString();
+		return sb.toString().replaceAll(",\"pilots\":\\[\\],\"craft\":\\[\\]", "");
 	}
 
 	@GET
@@ -61,7 +64,7 @@ public class CertificationServlet {
 	public String getCraft(@PathParam("id") int id) {
 		Cert c = Access.getAccess().Cert.getByID(id);
 		try {
-			return objectMapper.writeValueAsString(c);
+			return objectMapper.writeValueAsString(c).replaceAll("(,\"pilots\":\\[\\]|,\"craft\":\\[\\])", "");
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return "{}";

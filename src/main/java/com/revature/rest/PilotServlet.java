@@ -23,7 +23,7 @@ public class PilotServlet {
 		objectMapper = new ObjectMapper();
 		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPilots(@DefaultValue("1") @QueryParam("page") int page) {
@@ -33,17 +33,19 @@ public class PilotServlet {
 		sb.append("{\"count\":");
 		sb.append(pilotCount);
 		sb.append(",\"next\":");
-		if (pilotCount > (page)*10) {
+		if (pilotCount > (page) * 10) {
 			sb.append("\"https://flightschool.joshquizzes.com/api/pilot?page=");
-			sb.append(page+1);
+			sb.append(page + 1);
 			sb.append("\"");
-		} else sb.append("null");
+		} else
+			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
 			sb.append("\"https://flightschool.joshquizzes.com/api/pilot?page=");
-			sb.append(page-1);
+			sb.append(page - 1);
 			sb.append("\"");
-		} else sb.append("null");
+		} else
+			sb.append("null");
 		sb.append(",\"results\":");
 		try {
 			sb.append(objectMapper.writeValueAsString(p));
@@ -52,20 +54,20 @@ public class PilotServlet {
 			sb.append("null");
 		}
 		sb.append("}");
-		return sb.toString();
+		return sb.toString().replaceAll(",\"craft\":\\[\\]", "");
 	}
-	
+
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPilot(@PathParam("id") int id) {
 		Pilot p = Access.getAccess().Pilot.getByID(id);
 		try {
-			return objectMapper.writeValueAsString(p);
-		} catch(JsonProcessingException e) {
+			return objectMapper.writeValueAsString(p).replaceAll(",\"pilots\":\\[\\]", "");
+		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return "{}";
 		}
 	}
-	
+
 }

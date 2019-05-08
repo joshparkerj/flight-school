@@ -14,7 +14,7 @@ public class APIRootController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getRoot() {
 		return "{\"pilots\":\"" + Constants.url + "pilot\",\"aircraft\":\"" + Constants.url
-				+ "aircraft\",\"certifications\":\""+Constants.url+"certifications\"}";
+				+ "aircraft\",\"certifications\":\""+Constants.url+"certification\"}";
 	}
 
 }

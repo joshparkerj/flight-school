@@ -11,10 +11,10 @@ public class HelloApplication extends Application{
 	@Override
 	public Set< Class<?> > getClasses() {
 		final Set<Class<?>> returnValue = new HashSet<Class<?>>();
-		returnValue.add(PilotServlet.class);
-		returnValue.add(AircraftServlet.class);
-		returnValue.add(CertificationServlet.class);
-		returnValue.add(APIRootServlet.class);
+		returnValue.add(PilotController.class);
+		returnValue.add(AircraftController.class);
+		returnValue.add(CertificationController.class);
+		returnValue.add(APIRootController.class);
 		return returnValue;
 	}
 }

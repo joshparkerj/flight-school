@@ -6,7 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @Path("/")
-public class APIRootServlet {
+public class APIRootController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

@@ -14,10 +14,10 @@ import javax.ws.rs.core.MediaType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.db.Access;
-import com.revature.db.Cert;
+import com.revature.db.Craft;
 
-@Path("/certification")
-public class CertificationServlet {
+@Path("/aircraft")
+public class AircraftController {
 
 	static ObjectMapper objectMapper;
 	static {
@@ -28,21 +28,21 @@ public class CertificationServlet {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page) {
-		List<Cert> c = Access.getAccess().Cert.getCerts(page);
-		int certCount = Access.getAccess().Cert.getCount();
+		List<Craft> c = Access.getAccess().Craft.getCrafts(page);
+		int craftCount = Access.getAccess().Craft.getCount();
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\"count\":");
-		sb.append(certCount);
+		sb.append(craftCount);
 		sb.append(",\"next\":");
-		if (certCount > (page) * 10) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
+		if (craftCount > (page) * 10) {
+			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
 			sb.append(page + 1);
 			sb.append("\"");
 		} else
 			sb.append("null");
 		sb.append(",\"previous\":");
 		if (page > 1) {
-			sb.append("\"https://flightschool.joshquizzes.com/api/certification?page=");
+			sb.append("\"https://flightschool.joshquizzes.com/api/aircraft?page=");
 			sb.append(page - 1);
 			sb.append("\"");
 		} else
@@ -55,16 +55,16 @@ public class CertificationServlet {
 			sb.append("null");
 		}
 		sb.append("}");
-		return sb.toString().replaceAll(",\"pilots\":\\[\\],\"craft\":\\[\\]", "");
+		return sb.toString().replaceAll(",\"pilots\":\\[\\]", "");
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCraft(@PathParam("id") int id) {
-		Cert c = Access.getAccess().Cert.getByID(id);
+		Craft c = Access.getAccess().Craft.getByID(id);
 		try {
-			return objectMapper.writeValueAsString(c).replaceAll("(,\"pilots\":\\[\\]|,\"craft\":\\[\\])", "");
+			return objectMapper.writeValueAsString(c).replaceAll(",\"craft\":\\[\\]", "");
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			return "{}";

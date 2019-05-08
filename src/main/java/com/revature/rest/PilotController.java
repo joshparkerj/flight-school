@@ -16,7 +16,7 @@ import com.revature.db.Access;
 import com.revature.db.Pilot;
 
 @Path("/pilot")
-public class PilotServlet {
+public class PilotController {
 
 	static ObjectMapper objectMapper;
 	static {

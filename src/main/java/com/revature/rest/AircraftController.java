@@ -73,4 +73,11 @@ public class AircraftController {
 		}
 	}
 
+	@GET
+	@Path("/schema/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getCraftSchema() {
+		return "{ \"title\": \"Aircraft Object\", \"$schema\": \"http://json-schema.org/draft-04/schema\", \"description\": \"An aircraft that Flight School pilots are trained and certified to fly.\", \"type\": \"object\", \"required\": [  \"id\",  \"name\",  \"certs\",  \"pilot_count\",  \"url\" ], \"properties\": {  \"id\": {   \"description\": \"The unique integer identifier for this aircraft.\",   \"type\": \"integer\"  },  \"name\": {   \"description\": \"The name of the aircraft.\",   \"type\": \"string\"  },  \"certs\": {   \"description\": \"A comma-separated list of the certifications that allow a pilot to fly this aircraft.\",   \"type\": \"string\"  },  \"pilot_count\": {   \"description\": \"The number of pilots at Flight School who are certified to fly this aircraft.\",   \"type\": \"integer\"  },  \"url\": {   \"format\": \"uri\",   \"description\": \"The hypermedia URL of this resource.\",   \"type\": \"string\"  },  \"pilots\": {   \"description\": \"An array of the pilots at Flight School who are certified to fly this aircraft.\",   \"type\": \"array\",   \"items\": {    \"type\": \"object\",    \"required\": [     \"id\",     \"name\",     \"dob\",     \"sex\",     \"url\",     \"age\",     \"aircraft_count\"    ],    \"properties\": {     \"id\": {      \"description\": \"The unique integer identifier for this pilot.\",      \"type\": \"integer\"     },     \"name\": {	  \"description\": \"The pilot's name.\",      \"type\": \"string\"     },     \"dob\": {	  \"format\": \"date\",	  \"description\": \"The pilot's date of birth in YYYY-MM-DD format.\",      \"type\": \"string\"     },     \"sex\": {	  \"description\": \"The pilot's sex.\",      \"type\": \"string\"     },     \"url\": {	  \"description\": \"The hypermedia URL for the pilot.\",	  \"format\": \"uri\",      \"type\": \"string\"     },     \"age\": {	  \"description\": \"The pilot's age in years.\",      \"type\": \"integer\"     },     \"aircraft_count\": {	  \"description\": \"The number of aircraft this pilot is certified to fly.\",      \"type\": \"integer\"     }    }   }  } }}";
+	}
+
 }

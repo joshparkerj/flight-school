@@ -22,8 +22,7 @@ public class PilotDB implements Accessible.PilotAccess {
 				if (rs.next()) {
 					Pilot p = new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"),
 							rs.getInt("craft"));
-					try (PreparedStatement ps2 = con
-							.prepareStatement("SELECT * FROM pilot_aircraft(?);")) {
+					try (PreparedStatement ps2 = con.prepareStatement("SELECT * FROM pilot_aircraft(?);")) {
 						ps2.setInt(1, id);
 						try (ResultSet rs2 = ps2.executeQuery()) {
 							while (rs2.next()) {
@@ -41,10 +40,20 @@ public class PilotDB implements Accessible.PilotAccess {
 		return new Pilot();
 	}
 
-	public List<Pilot> getPilots(int page) {
+	public List<Pilot> getPilots(int page, String searchparam) {
 		List<Pilot> p = new ArrayList<Pilot>();
-		try (PreparedStatement ps = con.prepareStatement("SELECT * FROM pilot_details LIMIT 10 OFFSET ?;")) {
-			ps.setInt(1, 10 * (page - 1));
+		String sqlstr;
+		if (searchparam.length() == 0)
+			sqlstr = "SELECT * FROM pilot_details LIMIT 10 OFFSET ?;";
+		else
+			sqlstr = "SELECT * FROM pilot_details WHERE name ~~* ? LIMIT 10 OFFSET ?;";
+		try (PreparedStatement ps = con.prepareStatement(sqlstr)) {
+			if (searchparam.length() == 0)
+				ps.setInt(1, 10 * (page - 1));
+			else {
+				ps.setString(1, "%" + searchparam + "%");
+				ps.setInt(2, 10 * (page - 1));
+			}
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					p.add(new Pilot(rs.getInt("id"), rs.getString("name"), rs.getDate("dob"), rs.getString("sex"),

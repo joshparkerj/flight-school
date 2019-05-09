@@ -28,8 +28,9 @@ public class AircraftController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page) {
-		List<Craft> c = Access.getAccess().Craft.getCrafts(page);
+	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page,
+			@DefaultValue("") @QueryParam("search") String searchparam) {
+		List<Craft> c = Access.getAccess().Craft.getCrafts(page, searchparam);
 		int craftCount = Access.getAccess().Craft.getCount();
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\"count\":");

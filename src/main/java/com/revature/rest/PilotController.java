@@ -27,8 +27,8 @@ public class PilotController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getPilots(@DefaultValue("1") @QueryParam("page") int page) {
-		List<Pilot> p = Access.getAccess().Pilot.getPilots(page);
+	public String getPilots(@DefaultValue("1") @QueryParam("page") int page, @DefaultValue("") @QueryParam("search") String searchparam) {
+		List<Pilot> p = Access.getAccess().Pilot.getPilots(page,searchparam);
 		int pilotCount = Access.getAccess().Pilot.getCount();
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\"count\":");

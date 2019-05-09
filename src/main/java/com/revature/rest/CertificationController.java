@@ -28,8 +28,9 @@ public class CertificationController {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCrafts(@DefaultValue("1") @QueryParam("page") int page) {
-		List<Cert> c = Access.getAccess().Cert.getCerts(page);
+	public String getCerts(@DefaultValue("1") @QueryParam("page") int page,
+			@DefaultValue("") @QueryParam("search") String searchparam) {
+		List<Cert> c = Access.getAccess().Cert.getCerts(page,searchparam);
 		int certCount = Access.getAccess().Cert.getCount();
 		StringBuilder sb = new StringBuilder();
 		sb.append("{\"count\":");

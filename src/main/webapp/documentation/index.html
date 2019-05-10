@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FLIGHT SCHOOL documentation</title>
+<link rel="stylesheet" type="text/css" href="/rest-demo/index.css">
+</head>
+<body>
+	<header>
+		<h1>Welcome to FLIGHT SCHOOL!</h1>
+	</header>
+	<main class="splitmain">
+	<div class="nav">
+		<div class="navsection">
+			<h2>Getting Started</h2>
+			<a href="#introduction">Introduction</a> <a href="#baseurl">Base
+				URL</a> <a href="#authentication">Authentication</a> <a
+				href="#jsonschema">JSON Schema</a> <a href="#searching">Searching</a>
+		</div>
+		<div class="navsection">
+			<h2>Encoding</h2>
+			<a href="#json">JSON</a>
+		</div>
+		<div class="navsection">
+			<h2>Resources</h2>
+			<a href="#root">Root</a> <a href="#pilots">Pilots</a> <a
+				href="#certifications">Certifications</a> <a href="#aircraft">Aircraft</a>
+		</div>
+	</div>
+	<div class="maincontent">
+		<h2>Documentation</h2>
+		<h4 id="introduction">Introduction</h4>
+		<p>Flight School API has all the information you could want about
+			Flight School&trade;, a totally legitimate institution of
+			higher-learning. This documentation should help you familiarize
+			yourself with the resources available and how to consume them with
+			HTTP requests. If you have problems, all I can say is just keep
+			trying things and never give up!</p>
+		<h4 id="gettingstarted">Getting started</h4>
+		<p>Let's make our first API request to the Star Wars API!</p>
+		<p>Just paste the url for whatever resource you want into your
+			browser address bar! It is also possible to use curl, or a great API
+			tool like Postman. Personally, I recommend using the Google Chrome
+			browser with the JSONView extension installed. It makes browsing our
+			API a breeze!</p>
+		<p>Try visiting the API endpoint for the Boeing 747:</p>
+		<code class="block-code">http://flightschool.joshquizzes.com/flightschool/api/aircraft/14/</code>
+		<p>Here is the response we get:</p>
+		<code class="block-code"> { id: 14, name: "Boeing 747-400",
+			certs: "airliner, jet", pilot_count: 7, url:
+			"https://flightschool.joshquizzes.com/flightschool/api/aircraft/14/",
+			pilots: [ { id: 11, name: "Anne "Hollywood" Neven", dob:
+			"1998-05-17", sex: "female", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/11/",
+			age: 20, aircraft_count: 12 }, { id: 31, name: "Hannah "Typhoon"
+			Gadot", dob: "1995-12-29", sex: "female", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/31/",
+			age: 23, aircraft_count: 31 }, { id: 15, name: "Lena "Skunk"
+			Stallman", dob: "1998-11-01", sex: "female", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/15/",
+			age: 20, aircraft_count: 31 }, { id: 10, name: "Marcus "Sundown"
+			Williams", dob: "1985-12-24", sex: "male", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/10/",
+			age: 33, aircraft_count: 28 }, { id: 27, name: "Maria "Psycho"
+			Dillon", dob: "1980-01-01", sex: "female", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/27/",
+			age: 39, aircraft_count: 29 }, { id: 8, name: "Ron "Slider" Kerner",
+			dob: "1995-08-28", sex: "male", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/8/",
+			age: 23, aircraft_count: 32 }, { id: 21, name: "Sophie "Anti-matter"
+			Federov", dob: "1983-08-14", sex: "female", url:
+			"https://flightschool.joshquizzes.com/flightschool/api/pilot/21/",
+			age: 35, aircraft_count: 42 } ] } </code>
+		<h4 id="baseurl">Base URL</h4>
+		<p>
+			The <strong>Base URL</strong> is the root URL for all of the API. It
+			is
+			<code class="block-code">https://flightschool.joshquizzes.com/flightschool/api/</code>
+			The documentation below assumes you are prepending the Base URL to
+			the endpoints in order to make requests.
+		</p>
+		<h4 id="authentication">Authentication</h4>
+		<p>
+			Flight School&trade; provides a <strong>completely open API</strong>.
+			No authentication is required to query and get data. This also means
+			that you are limited to <strong>GET</strong> requests. If you find a
+			mistake in the data, feel free to laugh at our mistake and feel very
+			superior. There's no charge for schadenfreude!
+		</p>
+		<h4 id="jsonschema">JSON Schema</h4>
+		<p>
+			All resources support <a href="https://jsonschema.net">JSON
+				Schema</a>. Making a request to
+			<code>/api/&lt;resource&gt;/schema</code>
+			will give you the details of that resource. This will allow you to
+			programmatically inspect the attributes of that resource and their
+			types.
+		</p>
+		<h4 id="searching">Searching</h4>
+		<p>
+			All resources support a
+			<code>search</code>
+			parameter that filters the set of resources returned. This allows you
+			to make queries like:
+			<code>https://flightschool.joshquizzes.com/flightschool/api/pilot/?search=maverick</code>
+			.
+		</p>
+		<p>All searches will use case-insensitive partial matches on the
+			resources name.</p>
+		<h3>Encodings</h3>
+		<h4 id="json">JSON</h4>
+		<p>All api responses will be JSON-formatted.</p>
+		<h3>Resources</h3>
+		<h4 id="root">Root</h4>
+		<p>The Root resource provides information on all available
+			resources within the API.
+		<h4 id="pilots">Pilots</h4>
+		<p>The Pilot resource provides information on all of the pilots
+			who have totally earned their certifications from Flight
+			School&trade;.</p>
+		<h4 id="certifications">Certifications</h4>
+		<p>The Certification resource lists all of the completely
+			legitimate certifications that we award to the dedicated pilots who
+			have graduated from Flight School&trade;.</p>
+		<h4 id="aircraft">Aircraft</h4>
+		<p>The Aircraft resource lists all of the aircraft which our
+			completely capable and reliable pilots can be certified to fly.</p>
+	</div>
+	</main>
+</body>
+</html>

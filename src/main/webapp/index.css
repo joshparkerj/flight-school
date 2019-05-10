@@ -39,3 +39,73 @@ footer div {
 a {
 	color: red;
 }
+
+.splitmain {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	margin: 0;
+	padding: 15px 0 0 0;
+}
+
+.navsection,.maincontent {
+	grid-column: span 1;
+}
+
+.maincontent {
+	padding: 0 25px;
+}
+
+.navsection a {
+	color: hotpink;
+	display: block;
+	background-color: rgba(255,255,255,0.2);
+	margin: 5px;
+	padding: 5px 25px;
+	border: solid 1px rgba(255,255,255,0.4);
+	border-radius: 10px;
+}
+
+.navsection,.navsection a,.navsection h2 {
+	font-size: 0.9em;
+	box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+}
+
+.navsection {
+	border-radius: 5px;
+	border: solid 2px black;
+	margin-bottom: 5px;
+}
+
+.navsection h2 {
+	padding-bottom: 4px;
+}
+
+code {
+	background-color: white;
+	color: black;
+}
+
+.block-code {
+	padding: 1em;
+	display: block;
+	border-radius: 6px;
+}
+
+.maincontent h2 {
+	font-size: 1.8em;
+	text-shadow: 7px 5px 2px rgba(0,0,0,0.9);
+	border-bottom: solid 6px rgba(0,0,0,0.8);
+	padding-bottom: 20px;
+}
+
+.maincontent h3 {
+	font-size: 1.6em;
+	text-shadow: 5px 3px 6px rgba(0,0,0,0.8);
+	border-bottom: solid 4px rgba(0,0,0,0.6);
+	padding-bottom: 15px;
+}
+
+h4 {
+	border-bottom: solid 2px rgba(0,0,0,0.4);
+	padding-bottom: 10px;
+}
